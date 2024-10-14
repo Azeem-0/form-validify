@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsx_runtime_1 = require("react/jsx-runtime");
+const FormValidify_1 = require("../FormValidify");
+const InputComponent = ({ name, label, type, placeholder = 'Enter your data', minLength = 0, maxLength, pattern = undefined, disabled = false, readOnly = false, autoFocus = false, style }) => {
+    const { handleChange, errors } = (0, FormValidify_1.useFormData)();
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "mb-6 w-fit", children: [(0, jsx_runtime_1.jsx)("label", { htmlFor: name, className: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2", children: label }), type === 'checkbox' || type === 'radio' ? ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center", children: [(0, jsx_runtime_1.jsx)("input", { style: style, type: type, name: name, onChange: handleChange, disabled: disabled, readOnly: readOnly, autoFocus: autoFocus, "aria-invalid": !!errors[name], className: `mr-2 leading-tight ${errors[name] ? 'border-red-500' : 'border-gray-200'}` }), (0, jsx_runtime_1.jsx)("span", { className: "text-gray-700 text-sm", children: label })] })) : ((0, jsx_runtime_1.jsx)("input", { type: type, name: name, onChange: handleChange, minLength: minLength, maxLength: (maxLength && maxLength > 0) ? maxLength : undefined, pattern: pattern, disabled: disabled, readOnly: readOnly, autoFocus: autoFocus, style: style, className: `appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ${errors[name] ? 'border-red-500' : 'border-gray-200'}`, "aria-invalid": !!errors[name], "aria-describedby": `${name}-error`, placeholder: placeholder })), errors[name] && ((0, jsx_runtime_1.jsx)("span", { id: `${name}-error`, className: "text-red-500 text-xs italic", children: errors[name] }))] }));
+};
+exports.default = InputComponent;
