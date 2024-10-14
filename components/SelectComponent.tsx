@@ -39,7 +39,6 @@ const SelectComponent: React.FC<SelectComponentProps> = ({ name, label, options,
                     </svg>
                 </div>
             </div>
-            {error && <span id={`${name}-error`} className="text-red-500 text-xs italic">{error}</span>}
         </div>
     );
 };

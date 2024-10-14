@@ -55,7 +55,14 @@ const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
                     style={style}
                 />
             </div>
-            {error && <span id={`${name}-error`} className="text-red-500 text-xs italic">{error}</span>}
+            <span
+                id={`${name}-error`}
+                className={`text-red-500 text-xs italic transition-all duration-300 ease-in-out transform ${error ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'
+                    }`}
+            >
+                {error ? error : ' '}
+            </span>
+
         </div>
     );
 };
