@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormData } from '../FormValidify'
+import { useFormData } from '../context/FormValidify';
 
 interface InputComponentProps {
     name: string;
@@ -93,7 +93,7 @@ const InputComponent: React.FC<InputComponentProps> = ({ name, label, type, plac
                 )}
             <span
                 id={`${name}-error`}
-                className={`text-red-500 text-xs italic transition-opacity duration-300 ease-in-out ${errors[name] ? 'opacity-100' : 'opacity-0'
+                className={`text-red-500 text-xs italic transition-opacity text-center duration-300 ease-in-out ${errors[name] ? 'opacity-100' : 'opacity-0'
                     }`}
             >
                 {errors[name] ? errors[name] : ' '}

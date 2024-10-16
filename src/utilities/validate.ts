@@ -10,17 +10,27 @@ export const validateField = (target: HTMLInputElement | HTMLSelectElement | HTM
         return 'Email is not valid.';
     }
 
+    if (type === 'number') {
+        const { minLength, maxLength } = target;
+        if (minLength > Number.parseInt(value)) {
+            return `${name} must be more than ${minLength}`;
+        }
+        else if (maxLength < Number.parseInt(value)) {
+            return `${name} must be less than ${maxLength}`;
+        }
+    }
+
+
     if ((type == 'text' || type === 'password') && (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) {
 
         const { minLength, maxLength } = target;
 
-        // Check for minLength
+        // Check for minLength and maxLength
+
         if (minLength && value.length < minLength && value !== '') {
             return `${name} must be at least ${minLength} chars.`;
         }
-
-        // Check for maxLength
-        if (maxLength && value.length > maxLength && maxLength !== -1 && value !== '') {
+        else if (maxLength && value.length > maxLength && maxLength !== -1 && value !== '') {
             return `${name} must be at most ${maxLength} chars.`;
         }
 

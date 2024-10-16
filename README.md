@@ -18,7 +18,6 @@
    - [ButtonComponent Props](#buttoncomponent-props)
 5. [Examples](#examples)
 6. [Contributing](#contributing)
-7. [License](#license)
 
 ## Introduction
 
@@ -29,21 +28,24 @@
 To install **FormValidify**, use npm or yarn:
 
 ```bash
-npm install form-validify
+npm install react-form-validify
 ```
 
 or 
 
 ```bash
-yarn add form-validify
+yarn add react-form-validify
 ```
 
 ## Usage
 
-To use **FormValidify** in your project, import the components you need:
+To use **FormValidify** in your project, import the components and styles you need:
 
 ```tsx
-import { FormValidify, InputComponent, SelectComponent, TextAreaComponent, ButtonComponent } from 'form-validify';
+import { FormValidify, InputComponent, SelectComponent, TextAreaComponent, ButtonComponent } from 'react-form-validify';
+
+// to import styles
+import "react-form-validify/dist/styles.css";
 ```
 
 ### Components
@@ -78,6 +80,11 @@ A customizable input field component.
   placeholder="Enter your username"
   minLength={6}
   maxLength={15}
+  style={{
+    backgroundColor:"red";
+    paddingTop:"10px";
+    //custom stylings.
+  }}
 />
 ```
 
@@ -94,6 +101,11 @@ A dropdown select component for choosing from predefined options.
     { value: 'female', label: 'Female' },
     { value: 'other', label: 'Other' },
   ]}
+  style={{
+    backgroundColor:"red";
+    paddingTop:"10px";
+    //custom stylings.
+  }}
 />
 ```
 
@@ -108,6 +120,11 @@ A customizable text area component.
   placeholder="Tell us about yourself"
   rows={10}
   cols={20}
+  style={{
+    backgroundColor:"red";
+    paddingTop:"10px";
+    //custom stylings.
+  }}
 />
 ```
 
@@ -119,6 +136,11 @@ A customizable button component for submitting the form.
 <ButtonComponent
   type="submit"
   label="Submit"
+  style={{
+    backgroundColor:"red";
+    paddingTop:"10px";
+    //custom stylings.
+  }}
 />
 ```
 
@@ -128,7 +150,6 @@ A customizable button component for submitting the form.
 
 | Prop      | Type                     | Description                                          |
 |-----------|--------------------------|------------------------------------------------------|
-| onSubmit  | (values: Record<string, string>) => void | Function to handle form submission with values.     |
 | children  | ReactNode                | Child components (form elements).                   |
 
 ### InputComponent Props
@@ -140,6 +161,9 @@ A customizable button component for submitting the form.
 | type         | string         | Type of the input field (e.g., text, email).|
 | placeholder   | string        | Placeholder text for the input field.       |
 | minLength    | number         | Minimum length for validation (optional).    |
+| maxLength    | number         | Maximum length for validation (optional).    | 
+| style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
+
 
 ### SelectComponent Props
 
@@ -148,6 +172,8 @@ A customizable button component for submitting the form.
 | name      | string                         | The name of the select field.            |
 | label     | string                         | Label text for the select field.         |
 | options   | Array<{ value: string; label: string }> | Array of options for the select field.   |
+| style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
+
 
 ### TextAreaComponent Props
 
@@ -156,6 +182,7 @@ A customizable button component for submitting the form.
 | name      | string                   | The name of the text area.                   |
 | label     | string                   | Label text for the text area.                |
 | placeholder | string                | Placeholder text for the text area.          |
+| style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
 
 ### ButtonComponent Props
 
@@ -164,6 +191,7 @@ A customizable button component for submitting the form.
 | type      | string                   | Type of the button (e.g., submit).          |
 | label     | string                   | Label text for the button.                   |
 | onSubmit  | (values: Record<string, string>) => void | Function to handle button click (optional). |
+| style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
 
 ## Examples
 
@@ -171,11 +199,12 @@ A customizable button component for submitting the form.
 
 ```tsx
 import React from 'react';
-import { FormValidify, InputComponent, SelectComponent, TextAreaComponent, ButtonComponent } from 'form-validify';
+import { FormValidify, InputComponent, SelectComponent, TextAreaComponent, ButtonComponent } from 'react-form-validify';
+import "react-form-validify/dist/styles.css"
 
 function App() {
   return (
-    <FormValidify onSubmit={(values) => console.log(values)}>
+    <FormValidify>
       <InputComponent
         name="username"
         label="Username"
@@ -203,7 +232,7 @@ function App() {
         label="Bio"
         placeholder="Tell us about yourself"
       />
-      <ButtonComponent type="submit" label="Submit" />
+      <ButtonComponent type="submit" label="Submit" onSubmit={(values) => console.log(values)} />
     </FormValidify>
   );
 }
@@ -212,7 +241,3 @@ function App() {
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue to discuss your changes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

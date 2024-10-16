@@ -1,10 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import ButtonComponent from './components/ButtonComponent';
-import InputComponent from './components/InputComponent';
-import { debounce } from './utilities/debouncing';
-import { validateField } from './utilities/validate';
-import SelectComponent from './components/SelectComponent';
-import TextAreaComponent from './components/TextAreaComponent';
+import { debounce } from '../utilities/debouncing';
+import { validateField } from '../utilities/validate';
 
 
 interface FormDataContextType {
@@ -37,7 +33,6 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
 
     const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        console.log(name, value);
 
         setFormValues((prevValues) => ({
             ...prevValues,
@@ -48,10 +43,18 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
         // Validate the field
         const error = validateField(e.target);
 
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: error,
-        }));
+        setErrors((prevErrors) => {
+            // Create a new object with all previous errors
+            const updatedErrors = {
+                ...prevErrors,
+                [name]: error,
+            };
+
+            // Remove attributes with undefined values
+            return Object.fromEntries(
+                Object.entries(updatedErrors).filter(([_, value]) => value !== undefined)
+            );
+        });
 
     }, 300);
 
@@ -61,7 +64,9 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
 
     return (
         <FormValidifyContext.Provider value={{ formValues, handleChange, handleSubmit, errors }}>
-            {children}
+            <div className='flex flex-col items-center justify-center w-full p-20'>
+                {children}
+            </div>
         </FormValidifyContext.Provider>
     );
 };

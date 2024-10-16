@@ -1,18 +1,29 @@
 {
-  "name": "form-validify",
-  "version": "1.0.4",
-  "description": "",
+  "name": "react-form-validify",
+  "version": "1.0.1",
+  "description": "react-form-validify is a customizable React component library for building forms with ease, featuring flexible input fields and built-in validation.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build:css": "postcss src/styles/tailwind.css -o dist/styles.css",
+    "build": "npm run build:css && tsc"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "form-utility",
+    "react-forms",
+    "built-Validation"
+  ],
+  "author": "azeem@4659",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.3.11",
+    "postcss": "^8.4.47",
+    "postcss-cli": "^11.0.0",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "tailwindcss": "^3.4.13"
   }
 }

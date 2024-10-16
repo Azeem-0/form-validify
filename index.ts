@@ -1,8 +1,8 @@
 
-export { FormValidify } from "./FormValidify";
+export { FormValidify } from "./src/context/FormValidify";
 
 
-export { default as InputComponent } from "./components/InputComponent";
-export { default as SelectComponent } from "./components/SelectComponent";
-export { default as ButtonComponent } from "./components/ButtonComponent";
-export { default as TextAreaComponent } from "./components/TextAreaComponent";
+export { default as InputComponent } from "./src/components/InputComponent";
+export { default as SelectComponent } from "./src/components/SelectComponent";
+export { default as ButtonComponent } from "./src/components/ButtonComponent";
+export { default as TextAreaComponent } from "./src/components/TextAreaComponent";

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormData } from '../FormValidify';
+import { useFormData } from '../context/FormValidify';
 
 interface TextAreaComponentProps {
     name: string;
@@ -57,7 +57,7 @@ const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
             </div>
             <span
                 id={`${name}-error`}
-                className={`text-red-500 text-xs italic transition-all duration-300 ease-in-out transform ${error ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'
+                className={`text-red-500 text-xs italic text-center transition-all duration-300 ease-in-out transform ${error ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'
                     }`}
             >
                 {error ? error : ' '}
