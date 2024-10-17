@@ -1,5 +1,5 @@
 
-export const validateField = (target: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): string | undefined => {
+export const defaultValidation = (target: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): string | undefined => {
     const { type, name, value, required } = target;
 
     if (required && !value) {

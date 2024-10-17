@@ -17,6 +17,7 @@ interface TextAreaComponentProps {
     ariaLabel?: string;
     ariaDescribedby?: string;
     style?: React.CSSProperties;
+    validate?: (value: string) => string | null;
 }
 
 const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
@@ -31,9 +32,10 @@ const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
     autoFocus = false,
     ariaLabel,
     ariaDescribedby,
-    style
+    style,
+    validate
 }) => {
-    const { handleChange } = useFormData();
+    const { handleChange, errors } = useFormData();
 
     return (
         <div className="mb-4 w-full">
@@ -41,7 +43,9 @@ const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
             <div className="mt-1">
                 <textarea
                     name={name}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        handleChange(e, validate);
+                    }}
                     className={`appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ${error ? 'border-red-500' : 'border-gray-200'}`}
                     aria-invalid={!!error}
                     aria-describedby={ariaDescribedby || `${name}-error`}
@@ -57,10 +61,10 @@ const TextAreaComponent: React.FC<TextAreaComponentProps> = ({
             </div>
             <span
                 id={`${name}-error`}
-                className={`text-red-500 text-xs italic text-center transition-all duration-300 ease-in-out transform ${error ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'
+                className={`text-red-500 text-xs italic text-center transition-all duration-300 ease-in-out transform ${errors[name] ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'
                     }`}
             >
-                {error ? error : ' '}
+                {errors[name] ? errors[name] : ' '}
             </span>
 
         </div>

@@ -21,7 +21,7 @@
 
 ## Introduction
 
-**FormValidify** is a customizable and reusable form validation library built with React and TypeScript. It provides components for creating forms with validation, error handling, and customizable styles. The package is designed to be easy to use and integrates smoothly into your React applications.
+**FormValidify** is a customizable and reusable form validation library built with React and TypeScript. It provides components for creating forms with built in and user defined validations, error handling, and customizable styles. The package is designed to be easy to use and integrates smoothly into your React applications.
 
 ## Installation
 
@@ -85,6 +85,15 @@ A customizable input field component.
     paddingTop:"10px";
     //custom stylings.
   }}
+  validate={(value) => {
+    if (value.length < 6) {
+      return "Username must be at least 6 characters.";
+    }
+    if (!/^[a-zA-Z0-9]+$/.test(value)) {
+      return "Username must contain only alphanumeric characters.";
+    }
+    return null; // No error
+  }}
 />
 ```
 
@@ -125,6 +134,15 @@ A customizable text area component.
     paddingTop:"10px";
     //custom stylings.
   }}
+  validate={(value) => {
+    if (value.length < 6) {
+      return "Username must be at least 6 characters.";
+    }
+    if (!/^[a-zA-Z0-9]+$/.test(value)) {
+      return "Username must contain only alphanumeric characters.";
+    }
+    return null; // No error
+  }}
 />
 ```
 
@@ -163,6 +181,7 @@ A customizable button component for submitting the form.
 | minLength    | number         | Minimum length for validation (optional).    |
 | maxLength    | number         | Maximum length for validation (optional).    | 
 | style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
+|validate	     | (value: string) => string | null	Custom validation function that returns an error message or null.    |
 
 
 ### SelectComponent Props
@@ -183,6 +202,8 @@ A customizable button component for submitting the form.
 | label     | string                   | Label text for the text area.                |
 | placeholder | string                | Placeholder text for the text area.          |
 | style        | React.CSSProperties  | Custom styles defined by the user (optional).    |
+|validate	     | (value: string) => string | null	Custom validation function that returns an error message or null.    |
+
 
 ### ButtonComponent Props
 
@@ -216,8 +237,15 @@ function App() {
         name="email"
         label="Email"
         type="email"
-        placeholder="Enter your email"
+        validate={(value) => {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            return "Please enter a valid email address.";
+          }
+          return null;
+        }}
       />
+
       <SelectComponent
         name="gender"
         label="Gender"

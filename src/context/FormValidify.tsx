@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { debounce } from '../utilities/debouncing';
-import { validateField } from '../utilities/validate';
+import { defaultValidation } from '../utilities/validate';
 
 
 interface FormDataContextType {
     formValues: Record<string, string>;
     errors: Record<string, string | undefined>;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+    handleChange: (
+        e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>,
+        validate?: (value: string) => string | null // Optional validation function
+    ) => void;
     handleSubmit: (callback: (values: Record<string, string>) => void) => void;
 }
 
@@ -31,7 +34,7 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
 
     //using debouncing for efficient updates of the formvalues.
 
-    const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>, validate?: (value: string) => string | null) => {
         const { name, value } = e.target;
 
         setFormValues((prevValues) => ({
@@ -41,13 +44,15 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
 
 
         // Validate the field
-        const error = validateField(e.target);
+
+        const error = validate ? validate(value) : defaultValidation(e.target);
+
 
         setErrors((prevErrors) => {
             // Create a new object with all previous errors
             const updatedErrors = {
                 ...prevErrors,
-                [name]: error,
+                [name]: error ?? undefined,
             };
 
             // Remove attributes with undefined values
@@ -55,8 +60,10 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
                 Object.entries(updatedErrors).filter(([_, value]) => value !== undefined)
             );
         });
-
     }, 300);
+
+    console.log(errors);
+
 
     const handleSubmit = (callback: (values: typeof formValues) => void) => {
         callback(formValues);
