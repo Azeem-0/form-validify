@@ -62,8 +62,6 @@ export const FormValidify: React.FC<FormValidifyProps> = ({ children }) => {
         });
     }, 300);
 
-    console.log(errors);
-
 
     const handleSubmit = (callback: (values: typeof formValues) => void) => {
         callback(formValues);

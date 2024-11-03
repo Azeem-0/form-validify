@@ -47,7 +47,7 @@ const InputComponent: React.FC<InputComponentProps> = ({ name, label, type, plac
                         autoFocus={autoFocus}
                         aria-invalid={!!errors[name]}
 
-                        className={`mr-2 leading-tight relative -z-10 ${errors[name] ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`mr-2 leading-tight relative ${errors[name] ? 'border-red-500' : 'border-gray-200'}`}
                     />
 
                     <span className="text-gray-700 text-sm">{label}</span>
