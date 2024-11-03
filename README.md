@@ -81,7 +81,7 @@ A customizable input field component.
   minLength={6}
   maxLength={15}
   style={{
-    backgroundColor:"red";
+    backgroundColor:"gray";
     paddingTop:"10px";
     //custom stylings.
   }}
@@ -111,7 +111,7 @@ A dropdown select component for choosing from predefined options.
     { value: 'other', label: 'Other' },
   ]}
   style={{
-    backgroundColor:"red";
+    backgroundColor:"gray";
     paddingTop:"10px";
     //custom stylings.
   }}
@@ -130,7 +130,7 @@ A customizable text area component.
   rows={10}
   cols={20}
   style={{
-    backgroundColor:"red";
+    backgroundColor:"gray";
     paddingTop:"10px";
     //custom stylings.
   }}
@@ -155,7 +155,7 @@ A customizable button component for submitting the form.
   type="submit"
   label="Submit"
   style={{
-    backgroundColor:"red";
+    backgroundColor:"gray";
     paddingTop:"10px";
     //custom stylings.
   }}

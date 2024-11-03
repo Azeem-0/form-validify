@@ -1,6 +1,6 @@
 {
   "name": "react-form-validify",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "react-form-validify is a customizable React component library for building forms with ease, featuring flexible input fields and built-in validation.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",

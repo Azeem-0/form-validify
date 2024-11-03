@@ -68,7 +68,7 @@ const InputComponent: React.FC<InputComponentProps> = ({ name, label, type, plac
                                 readOnly={readOnly}
                                 autoFocus={autoFocus}
                                 aria-invalid={!!errors[name]}
-                                className={`mr-2 relative -z-10 leading-tight ${errors[name] ? 'border-red-500' : 'border-gray-200'
+                                className={`mr-2 relative leading-tight ${errors[name] ? 'border-red-500' : 'border-gray-200'
                                     }`}
                             />
                             <span className="text-gray-700 text-sm">{option.label}</span>
@@ -93,7 +93,7 @@ const InputComponent: React.FC<InputComponentProps> = ({ name, label, type, plac
                         readOnly={readOnly}
                         autoFocus={autoFocus}
                         style={style}
-                        className={`appearance-none block w-full relative -z-10 bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ${errors[name] ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`appearance-none block w-full relative bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 ${errors[name] ? 'border-red-500' : 'border-gray-200'}`}
                         aria-invalid={!!errors[name]}
                         aria-describedby={`${name}-error`}
                         placeholder={placeholder}
